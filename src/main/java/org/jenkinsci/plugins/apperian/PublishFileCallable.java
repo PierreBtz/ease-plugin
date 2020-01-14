@@ -177,7 +177,9 @@ public class PublishFileCallable extends MasterToSlaveFileCallable<Boolean> impl
 
         String version = null;
         if (!Utils.isEmptyString(upload.getVersion())) {
+            logger.info("Version from config: " + upload.getVersion());
             version = upload.applyEnvVariablesFormatter(upload.getVersion());
+            logger.info("Expanded version: " + version);
         }
 
         String versionNotes = null;

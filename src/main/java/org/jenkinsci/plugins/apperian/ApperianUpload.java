@@ -61,6 +61,8 @@ public class ApperianUpload implements Describable<ApperianUpload>, Serializable
     private transient FilePath filePath;
     private transient Formatter<String> envVariablesFormatter = null;
 
+    private final static Logger LOGGER = Logger.getLogger(ApperianUpload.class.getName());
+
     @DataBoundConstructor
     public ApperianUpload(
             String prodEnv,
@@ -252,7 +254,11 @@ public class ApperianUpload implements Describable<ApperianUpload>, Serializable
 
     public String applyEnvVariablesFormatter(String value) {
         if (envVariablesFormatter != null) {
+            LOGGER.info("Env variables formatter found");
             value = envVariablesFormatter.format(value);
+            LOGGER.info("Formatted value: " + value);
+        } else {
+            LOGGER.info("No env formatter defined: " + value);
         }
         return value;
     }
